@@ -1,0 +1,20 @@
+
+SELECT *
+FROM AERONAVE
+ORDER BY TIPO_AERONAVE;
+
+SELECT *
+FROM VOO
+WHERE DATE(HORARIO_SAIDA) = '2024-06-17'
+   OR YEARWEEK(HORARIO_SAIDA, 1) = YEARWEEK('2024-06-17', 1) -- Troca a data pela desejada(dia/mes/ano)--
+   OR (YEAR(HORARIO_SAIDA) = 2024 AND MONTH(HORARIO_SAIDA) = 6);
+
+SELECT V.*
+FROM VOO V
+JOIN ESCALA E ON V.ID_VOO = E.ID_VOO
+WHERE E.AEROPORTO_ESCALA = 'ATL'; -- substitua pelo nome do aeroporto desejado
+
+SELECT *
+FROM VOO V
+JOIN ESCALA E ON V.ID_VOO = E.ID_VOO
+WHERE E.AEROPORTO_ESCALA = 'ATL'; -- troca o nome do aeroporto pelo desejado--
