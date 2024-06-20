@@ -1,19 +1,63 @@
-SELECT *
-FROM AERONAVE
-ORDER BY TIPO_AERONAVE;
+-- a) Listagem de Aeronaves ordenadas por tipo
+SELECT 
+    a.idAeronave, 
+    a.nomeAeronave, 
+    m.nomeModelo 
+FROM 
+    Aeronave a
+JOIN 
+    modeloAeronave m ON a.modeloAeronave = m.idModelo
+ORDER BY 
+    m.nomeModelo;
+    
+-- b) Relatório de Vôos das Aeronaves por período (dia/semana/mês)
+-- Relatório de Voos do Dia Atual
+SELECT
+    DATE(tempoPartida) AS Dia,
+    aeronave,
+    COUNT(*) AS NumeroDeVoos
+FROM Voo
+GROUP BY DATE(tempoPartida), aeronave
+ORDER BY Dia, aeronave;
 
-SELECT *
-FROM VOO
-WHERE DATE(HORARIO_SAIDA) = '2024-06-17'
-   OR YEARWEEK(HORARIO_SAIDA, 1) = YEARWEEK('2024-06-17', 1) -- Troca a data pela desejada(dia/mes/ano)--
-   OR (YEAR(HORARIO_SAIDA) = 2024 AND MONTH(HORARIO_SAIDA) = 6);
+-- Relatório de Vôos das Aeronaves por semana
+SELECT
+    YEAR(tempoPartida) AS Ano,
+    WEEK(tempoPartida) AS Semana,
+    aeronave,
+    COUNT(*) AS NumeroDeVoos
+FROM Voo
+GROUP BY YEAR(tempoPartida), WEEK(tempoPartida), aeronave
+ORDER BY Ano, Semana, aeronave;
 
-SELECT V.*
-FROM VOO V
-JOIN ESCALA E ON V.ID_VOO = E.ID_VOO
-WHERE E.AEROPORTO_ESCALA = 'ATL'; -- substitua pelo nome do aeroporto desejado
+-- Relatório de Vôos das Aeronaves por mês
+SELECT
+    YEAR(tempoPartida) AS Ano,
+    MONTH(tempoPartida) AS Mes,
+    aeronave,
+    COUNT(*) AS NumeroDeVoos
+FROM Voo
+GROUP BY YEAR(tempoPartida), MONTH(tempoPartida), aeronave
+ORDER BY Ano, Mes, aeronave;
 
-SELECT *
-FROM VOO V
-JOIN ESCALA E ON V.ID_VOO = E.ID_VOO
-WHERE E.AEROPORTO_ESCALA = 'ATL'; -- troca o nome do aeroporto pelo desejado--
+-- c) Listagem de vôos que fazem escala em um determinado local
+SELECT DISTINCT
+    v.idVoo,
+    v.partida,
+    v.destino,
+    v.previstoPartida,
+    v.previstoChegada,
+    v.aeronave
+FROM Voo v
+JOIN Aeroporto a ON v.partida = a.idAeroporto OR v.destino = a.idAeroporto
+WHERE a.sigla = 'GRU'; -- Troque a sigla para saber de outros
+    
+-- d) Exibição de poltronas disponíveis em um determinado vôo/avião
+-- Substitua 'ID_DO_VOO' pelo identificador do voo desejado
+SELECT
+    p.idPoltrona,
+    p.numPoltrona
+FROM Poltrona p
+LEFT JOIN Passagem pa ON p.idPoltrona = pa.poltrona AND pa.vooNum = 1 -- Troque o id do voo para saber de outros
+WHERE pa.poltrona IS NULL;
+

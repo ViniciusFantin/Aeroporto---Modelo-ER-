@@ -1,73 +1,64 @@
-INSERT INTO AERONAVE (TIPO_AERONAVE, NRO_POLTRONAS) VALUES
-('Boeing 737', 150),
-('Airbus A320', 180),
-('Embraer E195', 120),
-('Boeing 787', 250),
-('Airbus A350', 300),
-('Boeing 777', 200),
-('Embraer E190', 100),
-('Airbus A330', 220),
-('Boeing 747', 400),
-('Airbus A380', 500);
+-- Populando Cidade
+INSERT INTO cidade (cidade, estado, pais, sigla) VALUES 
+('São Paulo', 'SP', 'Brasil', 'SP'),
+('Rio de Janeiro', 'RJ', 'Brasil', 'RJ'),
+('Brasília', 'DF', 'Brasil', 'DF'),
+('Belo Horizonte', 'MG', 'Brasil', 'MG');
 
--- Populando a tabela VOO
-INSERT INTO VOO (ID_AERONAVE, AEROPORTO_ORIGEM, AEROPORTO_DESTINO, HORARIO_SAIDA, HORARIO_CHEGADA) VALUES
-(1, 'GIG', 'GRU', '2024-06-12 08:00:00', '2024-06-12 10:00:00'),
-(2, 'GRU', 'JFK', '2024-06-13 10:30:00', '2024-06-13 18:04:00'),
-(3, 'CDG', 'LHR', '2024-06-14 12:00:00', '2024-06-14 14:12:00'),
-(4, 'LAX', 'SYD', '2024-06-15 15:00:00', '2024-06-16 06:33:00'),
-(5, 'HND', 'PEK', '2024-06-16 09:30:00', '2024-06-16 12:00:00'),
-(6, 'SIN', 'DXB', '2024-06-17 18:00:00', '2024-06-18 02:31:00'),
-(7, 'JFK', 'LAX', '2024-06-18 10:00:00', '2024-06-18 14:33:00'),
-(8, 'PEK', 'SIN', '2024-06-19 08:30:00', '2024-06-19 14:04:00'),
-(9, 'LHR', 'CDG', '2024-06-20 11:00:00', '2024-06-20 13:30:00'),
-(10, 'SYD', 'HND', '2024-06-21 16:00:00', '2024-06-21 19:37:00');
+-- Populando Aeroporto
+INSERT INTO Aeroporto (nome, cidade, CNPJ, sigla) VALUES 
+('Aeroporto Internacional de São Paulo', 1, '12345678000123', 'GRU'),
+('Aeroporto Santos Dumont', 2, '12345678000124', 'SDU'),
+('Aeroporto Internacional de Brasília', 3, '12345678000125', 'BSB'),
+('Aeroporto de Confins', 4, '12345678000126', 'CNF');
 
--- Populando a tabela ESCALA
-INSERT INTO ESCALA (ID_VOO, AEROPORTO_ESCALA, HORARIO_SAIDA_ESCALA) VALUES
-(2, 'ATL', '2024-06-13 12:00:00'),
-(4, 'HKG', '2024-06-15 22:00:00'),
-(6, 'BKK', '2024-06-17 20:00:00'),
-(8, 'KUL', '2024-06-19 16:30:00'),
-(10, 'ICN', '2024-06-21 17:30:00'),
-(1, 'CGH', '2024-06-12 09:30:00'),
-(3, 'MAD', '2024-06-14 13:30:00'),
-(5, 'SHA', '2024-06-16 10:30:00'),
-(7, 'SFO', '2024-06-18 11:30:00'),
-(9, 'AMS', '2024-06-20 12:30:00');
+-- Populando Modelo Aeronave
+INSERT INTO modeloAeronave (nomeModelo, anoModelo, capacidadePoltronas, capacidadeCombustivel) VALUES 
+('Boeing 737', 2018, 189, 26000),
+('Airbus A320', 2019, 180, 24200),
+('Embraer E190', 2020, 114, 13000),
+('Boeing 777', 2017, 396, 181283);
 
--- Populando a tabela POLTRONA
-INSERT INTO POLTRONA (ID_VOO, DISPONIVEL, LOCALIZACAO) VALUES
-(1, 1, 'A1'),
-(1, 1, 'A2'),
-(1, 0, 'B1'),
-(1, 1, 'B2'),
-(2, 1, 'C1'),
-(2, 1, 'C2'),
-(2, 0, 'D1'),
-(2, 1, 'D2'),
-(3, 1, 'E1'),
-(3, 1, 'E2'),
-(3, 0, 'F1'),
-(3, 1, 'F2'),
-(4, 1, 'G1'),
-(4, 1, 'G2'),
-(4, 0, 'H1'),
-(4, 1, 'H2'),
-(5, 1, 'I1'),
-(5, 1, 'I2'),
-(5, 0, 'J1'),
-(5, 1, 'J2');
+-- Populando Pilotos
+INSERT INTO Pilotos (nomePiloto, CPF, nascimento, numCertificacao) VALUES 
+('Carlos Silva', '12345678901', '1980-05-10', 1001),
+('Ana Souza', '12345678902', '1985-08-15', 1002),
+('Pedro Oliveira', '12345678903', '1975-12-20', 1003),
+('Maria Pereira', '12345678904', '1990-03-25', 1004);
 
--- Populando a tabela CLIENTE_PREFENCIAL
-INSERT INTO CLIENTE_PREFENCIAL (NOME, EMAIL) VALUES
-('João Silva', 'joao.silva@example.com'),
-('Maria Santos', 'maria.santos@example.com'),
-('Carlos Oliveira', 'carlos.oliveira@example.com'),
-('Ana Rodrigues', 'ana.rodrigues@example.com'),
-('Pedro Sousa', 'pedro.sousa@example.com'),
-('Mariana Costa', 'mariana.costa@example.com'),
-('Luís Pereira', 'luis.pereira@example.com'),
-('Sofia Fernandes', 'sofia.fernandes@example.com'),
-('Rui Martins', 'rui.martins@example.com'),
-('Inês Almeida', 'ines.almeida@example.com');
+-- Populando Aeronave
+INSERT INTO Aeronave (nomeAeronave, ativo, modeloAeronave, piloto) VALUES 
+('Aeronave 1', 1, 1, 1),
+('Aeronave 2', 1, 2, 2),
+('Aeronave 3', 1, 3, 3),
+('Aeronave 4', 1, 4, 4);
+
+-- Populando Cliente
+INSERT INTO Cliente (nomeCliente, dataNascimento, passagem, sexo, CPF) VALUES 
+('João da Silva', '1985-01-10', 'P12345', 'M', '12345678910'),
+('Maria Santos', '1990-02-20', 'P12346', 'F', '12345678911'),
+('Pedro Oliveira', '1980-03-30', 'P12347', 'M', '12345678912'),
+('Ana Pereira', '1995-04-25', 'P12348', 'F', '12345678913');
+
+-- Populando Poltrona
+INSERT INTO Poltrona (numPoltrona, ocupado) VALUES 
+('1A', 0),
+('1B', 0),
+('2A', 1),
+('2B', 1),
+('3A', 0),
+('3B', 0);
+
+-- Populando VOO
+INSERT INTO Voo (partida, destino, previstoPartida, previstoChegada, tempoPartida, tempoChegada, aeronave) VALUES 
+(1, 2, '2023-06-01 08:00:00', '2023-06-01 10:00:00', '2023-06-01 08:00:00', '2023-06-01 10:00:00', 1),
+(2, 3, '2023-06-02 09:00:00', '2023-06-02 11:00:00', '2023-06-02 09:00:00', '2023-06-02 11:00:00', 2),
+(3, 4, '2023-06-03 10:00:00', '2023-06-03 12:00:00', '2023-06-03 10:00:00', '2023-06-03 12:00:00', 3),
+(4, 1, '2023-06-04 11:00:00', '2023-06-04 13:00:00', '2023-06-04 11:00:00', '2023-06-04 13:00:00', 4);
+
+-- Populando Passagem
+INSERT INTO Passagem (numeroPassagem, clientePassagem, vooNum, poltrona, aeroportoPartida, aeroportoDestino) VALUES 
+(12345, 1, 1, 1, 1, 2),
+(12346, 2, 2, 2, 2, 3),
+(12347, 3, 3, 3, 3, 4),
+(12348, 4, 4, 4, 4, 1);

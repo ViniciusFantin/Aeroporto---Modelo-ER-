@@ -1,20 +1,16 @@
-SELECT
-    V.ID_VOO,
-    V.AEROPORTO_ORIGEM,
-    V.AEROPORTO_DESTINO,
-    V.HORARIO_SAIDA,
-    V.HORARIO_CHEGADA,
-    A.TIPO_AERONAVE,
-    E.AEROPORTO_ESCALA,
-    E.HORARIO_SAIDA_ESCALA,
-    P.LOCALIZACAO AS POLTRONA_DISPONIVEL
-FROM
-    VOO V
-INNER JOIN
-    AERONAVE A ON V.ID_AERONAVE = A.ID_AERONAVE
-INNER JOIN
-    ESCALA E ON V.ID_VOO = E.ID_VOO
-LEFT JOIN
-    POLTRONA P ON V.ID_VOO = P.ID_VOO AND P.DISPONIVEL = 1
-ORDER BY
-    A.TIPO_AERONAVE;
+SELECT 
+    A.idAeronave,
+    A.nomeAeronave,
+    A.ativo,
+    MA.nomeModelo,
+    MA.anoModelo,
+    MA.capacidadePoltronas,
+    MA.capacidadeCombustivel,
+    P.nomePiloto
+FROM 
+    Aeronave A
+INNER JOIN 
+    modeloAeronave MA ON A.modeloAeronave = MA.idModelo
+INNER JOIN 
+    Pilotos P ON A.piloto = P.idPiloto;
+
